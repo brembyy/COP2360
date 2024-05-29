@@ -1,0 +1,45 @@
+using System;
+
+// Define the class using fields from the first .txt file
+class Octopus
+{
+    private string name;
+    public int Age = 10;
+    public Octopus(string name)
+    {
+        this.name = name;
+    }
+}
+
+// Implement the IEnumerator interface using the Countdown class from the second .txt file
+public interface IEnumerator
+{
+    bool MoveNext();
+    object Current { get; }
+    void Reset();
+}
+
+class Countdown : IEnumerator
+{
+    private int count = 11;
+    public bool MoveNext() => count-- > 0;
+    public object Current => count;
+    public void Reset() { throw new NotSupportedException(); }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create an instance of Octopus
+        Octopus o = new Octopus("Jack");
+        Console.WriteLine(o.Age);
+
+        // Create an instance of Countdown and use it as IEnumerator
+        IEnumerator e = new Countdown();
+        while (e.MoveNext())
+        {
+            Console.Write(e.Current); // Output: 109876543210
+        }
+    }
+}
