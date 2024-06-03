@@ -1,0 +1,44 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter dividend: ");
+        string input1 = Console.ReadLine();
+
+        Console.Write("Enter divisor: ");
+        string input2 = Console.ReadLine();
+
+        DivideAndPrintResult(input1, input2);
+    }
+
+    static void DivideAndPrintResult(string input1, string input2)
+    {
+        try
+        {
+            decimal number1 = Convert.ToDecimal(input1);
+            decimal number2 = Convert.ToDecimal(input2);
+
+            decimal result = number1 / number2;
+
+            Console.WriteLine($"The result is {result}.");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Your input(s) are not in a valid number format.");
+        }
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Division by zero is not allowed.");
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine("The number entered is too large or too small.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+        }
+    }
+}
